@@ -1,0 +1,8 @@
+prawcore
+praw
+scikit-learn
+faiss-cpu
+numpy
+torch
+transformers
+lupyne
