@@ -1,3 +1,5 @@
 .vscode
 reddit
 data.json
+faiss_index.bin
+faiss_meta.json
