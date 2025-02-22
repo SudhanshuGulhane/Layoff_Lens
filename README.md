@@ -9,6 +9,8 @@
 - 🤖 **BERT-Based Embeddings** - Uses **`bge-small-en-v1.5`** for dense retrieval.
 - 🔗 **FAISS Indexing** - Enables fast nearest-neighbor searches for embeddings.
 - 📜 **Lucene Indexing** - Facilitates keyword-based search for fast retrieval.
+- 🌍 **Flask API** - Backend for handling search requests.
+- 🖥 **Interactive Web UI** - AJAX-based frontend for seamless query execution.
 - 🛠 **Docker Support** - Fully containerized for easy deployment.
 
 ---
@@ -25,9 +27,19 @@
 ├── post_sentences.txt           # Preprocessed sentences from Reddit
 ├── requirements.txt             # Python dependencies
 ├── Dockerfile                   # Containerization setup
-├── README.md                     # Project documentation
-├── data.json                     # Scraped Reddit data
-|── .gitignore                    # Ignore unnecessary files
+├── README.md                    # Project documentation
+├── data.json                    # Scraped Reddit data
+|── .gitignore                   # Ignore unnecessary files
+├── faiss_store.py               # Stores FAISS index from scraped data
+├── faiss_query.py               # Queries stored FAISS index
+├── app.py                       # Flask Backend (Serves API & Frontend)
+├── faiss_index.bin              # Stored FAISS index
+├── faiss_meta.json              # Metadata mapping index → sentences & URLs
+├── templates/
+    ├── index.html               # Frontend UI (Search Page)
+├── static/
+    ├── style.css                # Styling for UI
+    ├── app.js                   # AJAX logic for search API
 ```
 
 ---
@@ -45,37 +57,21 @@ Make sure Python **3.8+** is installed.
 pip install -r requirements.txt
 ```
 
-### **3️⃣ Install PyLucene**
-PyLucene must be installed manually:
-```sh
-pip install pylucene
-```
-
----
-
-## **🐳 Running with Docker**
-### **1️⃣ Build the Docker Image**
-```sh
-docker build -t layoff-lens .
-```
-
-### **2️⃣ Run the Container**
-```sh
-docker run -it layoff-lens
-```
-
-### **3️⃣ Run the Search Engine**
-```sh
-python main.py
-```
-
----
-
 ## **🔍 Usage**
 - **Scrape data from Reddit**
   ```sh
   python scrapper.py
   ```
+- **Generate FAISS Index**
+  ```sh
+  python faiss_store.py
+  ```
+- **Running Flask Backend**
+  ```sh
+  python app.py
+  ```
+  Opens UI at: http://127.0.0.1:5000/
+  API Endpoint: /search?query=tech layoffs&top_k=5
 - **Create a Lucene index**
   ```sh
   python createIndex.py
