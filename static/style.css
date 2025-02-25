@@ -62,3 +62,17 @@ button:hover {
     color: #007bff;
     text-decoration: none;
 }
+
+.resources-dropdown {
+    padding: 5px;
+    font-size: 14px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background: white;
+}
+
+.resources-dropdown:hover {
+    border-color: #007bff;
+}

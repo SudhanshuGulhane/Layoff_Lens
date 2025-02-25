@@ -20,12 +20,27 @@ function searchQuery() {
             return;
         }
 
-        data.results.forEach(res => {
+        data.results.forEach((res, index) => {
             let item = document.createElement("div");
             item.classList.add("result-item");
+
+            // Construct the resources dropdown if links exist
+            let resourcesDropdown = "";
+            if (res.links && res.links.length > 0) {
+                resourcesDropdown = `
+                    <select class="resources-dropdown" onchange="openResource(this)">
+                        <option selected disabled>Related Articles</option>
+                        ${res.links.map((link, i) => `<option value="${link}">Resource Link ${i + 1}</option>`).join("")}
+                    </select>
+                `;
+            }
+
             item.innerHTML = `
-                <p><strong>Sentence:</strong> ${res.sentence}</p>
-                <p><a href="${res.url}" target="_blank">Read More</a></p>
+                <p><strong>Article: ${index+1}</strong> ${res.sentence}</p>
+                <p>
+                    <a href="${res.url}" target="_blank">Source</a>
+                    ${resourcesDropdown}
+                </p>
             `;
             resultsDiv.appendChild(item);
         });
@@ -34,4 +49,11 @@ function searchQuery() {
         console.error("Error:", error);
         alert("An error occurred while fetching results.");
     });
+}
+
+function openResource(selectElement) {
+    let selectedLink = selectElement.value;
+    if (selectedLink) {
+        window.open(selectedLink, "_blank");
+    }
 }
