@@ -69,6 +69,11 @@ pip install -r requirements.txt
 
 ---
 
+## UI snippet
+
+![Screenshot (2296)](https://github.com/user-attachments/assets/2029f4be-279c-4dc5-9ca5-bba264c63f34)
+
+
 ## **📜 License**
 This project is licensed under the **MIT License**.
 
